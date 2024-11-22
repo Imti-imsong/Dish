@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add a Menu</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    .container h2 {
+      background-color: #0078d7;
+      color: #fff;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 1.5em;
+    }
+    form {
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #0078d7;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 120, 215, 0.2);
+    }
+    button {
+      background-color: #0078d7;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #005cbf;
+    }
+    .hidden {
+      display: none;
+    }
+    .radio-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .radio-group label {
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Add a Dish That You Like Having</h2>
+    <form id="menuForm">
+      <label for="dishName">Dish Name:</label>
+      <input type="text" id="dishName" name="dishName" placeholder="Enter the dish name" required>
+
+      <label>Dish Source:</label>
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="menuType" value="home" checked> Cook at Home
+        </label>
+        <label>
+          <input type="radio" name="menuType" value="order"> Order from Outside
+        </label>
+      </div>
+
+      <div id="homeFields">
+        <!-- <label for="description">Description:</label>
+        <textarea id="description" name="description" placeholder="Describe the dish"></textarea> -->
+
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="snacks">Snacks</option>
+        </select>
+
+        <label for="dietaryPreference">Dietary Preference:</label>
+        <select id="dietaryPreference" name="dietaryPreference">
+          <option value="vegetarian">Vegetarian</option>
+          <option value="non-vegetarian">Non-Vegetarian</option>
+        </select>
+      </div>
+
+      <div id="orderFields" class="hidden">
+        <label for="restaurantName">Restaurant Name:</label>
+        <input type="text" id="restaurantName" name="restaurantName" placeholder="Enter the restaurant name">
+
+
+        <label for="categoryOrder">Category:</label>
+        <select id="categoryOrder" name="categoryOrder">
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="snacks">Snacks</option>
+        </select>
+      </div>
+
+      <button type="submit">Add Menu</button>
+    </form>
+  </div>
+
+  <script>
+    const menuForm = document.getElementById("menuForm");
+    const homeFields = document.getElementById("homeFields");
+    const orderFields = document.getElementById("orderFields");
+    const menuTypeRadios = document.querySelectorAll("input[name='menuType']");
+
+    menuTypeRadios.forEach(radio => {
+      radio.addEventListener("change", () => {
+        if (radio.value === "home") {
+          homeFields.classList.remove("hidden");
+          orderFields.classList.add("hidden");
+        } else {
+          orderFields.classList.remove("hidden");
+          homeFields.classList.add("hidden");
+        }
+      });
+    });
+
+    menuForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      
+      // Create an object from the form data
+      const formData = new FormData(menuForm);
+      const menuItem = {};
+      formData.forEach((value, key) => {
+        menuItem[key] = value;
+      });
+
+      // Retrieve existing dishes from localStorage
+      let dishes = JSON.parse(localStorage.getItem("dishes")) || [];
+
+      // Add the new menu item
+      dishes.push(menuItem);
+
+      // Save the updated dishes back to localStorage
+      localStorage.setItem("dishes", JSON.stringify(dishes));
+
+      // Redirect to the dashboard
+      window.location.href = "dashboard.html";
+    });
+  </script>
+</body>
+</html>
