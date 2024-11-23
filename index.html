@@ -12,23 +12,27 @@
     }
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #f4f7fb;
+      background: linear-gradient(to right, #ede574, #e1f5c4); /* Gradient background */
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      color: #333;
     }
     .form-container {
       background-color: #fff;
       padding: 30px;
-      border-radius: 10px;
+      border-radius: 15px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       width: 400px;
+      transition: all 0.3s ease;
     }
     .form-container h2 {
       text-align: center;
       color: #333;
       margin-bottom: 20px;
+      font-size: 1.8em;
+      color: #0078d7; /* Primary color for text */
     }
     .form-group {
       margin-bottom: 20px;
@@ -37,30 +41,35 @@
       display: block;
       margin-bottom: 8px;
       color: #555;
+      font-weight: bold;
     }
     .form-group input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       border: 1px solid #ccc;
       border-radius: 5px;
+      font-size: 1em;
     }
     .form-group input:focus {
       outline: none;
-      border-color: #0078d7;
+      border-color: #0078d7; /* Focus border color */
     }
     .btn {
       display: block;
       width: 100%;
-      padding: 10px;
-      background-color: #0078d7;
-      color: white;
+      padding: 12px;
+      background: linear-gradient(to right, #ede574, #e1f5c4); /* Button gradient */
+      color: #333;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 1em;
+      font-size: 1.2em;
+      font-weight: bold;
+      transition: background 0.3s ease;
     }
     .btn:hover {
-      background-color: #005fa3;
+      background-color: #0078d7; /* Hover color */
+      color: white;
     }
     .error {
       color: red;
