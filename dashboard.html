@@ -12,248 +12,239 @@
     }
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #f4f7fb;
+      background: linear-gradient(135deg, #ede574, #e1f5c4);
       color: #333;
-      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
     .container {
       max-width: 1000px;
-      margin: 50px auto;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       overflow: hidden;
     }
     h2 {
       text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.8em;
+      background: #ede574;
+      padding: 15px;
+      margin: 0;
+      font-size: 1.5em; /* Adjusted font size */
       color: #333;
+      font-weight: bold;
     }
-    .category {
-      margin-top: 30px;
+    .section {
+      padding: 20px;
     }
-    .category h3 {
-      color: #0078d7;
-      font-size: 1.5em;
+    .section h3 {
+      font-size: 1.2em; /* Adjusted font size */
       margin-bottom: 15px;
+      color: #666;
     }
     .menu-list {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 20px;
     }
-    .menu-item {
-      background: #f9f9f9;
+    .menu-item, .recommendation-item {
+      background: #e1f5c4;
       border-radius: 10px;
-      padding: 15px;
+      padding: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       text-align: center;
       cursor: pointer;
     }
-    .menu-item:hover {
+    .menu-item:hover, .recommendation-item:hover {
+      transform: scale(1.05);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
-    .menu-item h4 {
-      font-size: 1.2em;
-      margin-bottom: 10px;
+    .menu-item h4, .recommendation-item h4 {
+      font-size: 1em; /* Adjusted font size */
       color: #333;
     }
-    .menu-item p {
-      font-size: 0.9em;
-      color: #555;
-    }
     .menu-item.selected {
-      background-color: #a5d8ff;
-      border: 2px solid #0078d7;
-    }
-    .menu-item .date {
-      font-size: 0.8em;
-      color: #999;
-      margin-top: 10px;
-    }
-    .date-container {
-      text-align: right;
-      font-size: 1.2em;
-      color: #555;
-      margin-top: 20px;
+      background-color: #ede574;
+      border: 2px solid #666;
     }
     .add-menu-btn {
       display: block;
-      margin: 20px auto;
-      background-color: #0078d7;
-      color: white;
-      padding: 10px 20px;
+      margin: 20px auto 0;
+      width: 100%; /* Full-width button */
+      background-color: #ede574;
+      color: #333;
+      padding: 12px; /* Adjusted padding */
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      text-align: center;
-      font-size: 1.1em;
+      font-size: 1em; /* Adjusted font size */
+      font-weight: bold;
       text-decoration: none;
+      text-align: center;
     }
     .add-menu-btn:hover {
-      background-color: #005fa3;
+      background-color: #d3db5a;
     }
-    .recommendation-container {
-      margin-top: 30px;
-      padding: 15px;
-      background-color: #f1f1f1;
-      border-radius: 10px;
+    .date-container {
+      text-align: right;
+      font-size: 1em; /* Adjusted font size */
+      margin-bottom: 10px;
+      color: #555;
+    }
+    .recommendation-container,
+    .category-container {
+      padding: 20px;
+      background: #f8fdf4;
+      border-radius: 15px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
     }
-    .recommendation-container h3 {
-      color: #0078d7;
-      font-size: 1.5em;
+    .category-container h3 {
+      font-size: 1.2em; /* Adjusted font size */
       margin-bottom: 15px;
+      color: #666;
     }
-    .recommendation-item {
-      background: #ffffff;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
+
+    /* Responsive Design for Mobile */
+    @media (max-width: 768px) {
+      .menu-list {
+        grid-template-columns: repeat(4, 1fr); /* Four items per row */
+        gap: 10px;
+      }
+      .menu-item, .recommendation-item {
+        padding: 8px;
+        font-size: 0.9em; /* Slightly smaller font for cards */
+      }
+      h2 {
+        font-size: 1.3em; /* Adjusted header font size */
+      }
+      .section h3 {
+        font-size: 1em; /* Adjusted subheader font size */
+      }
+      .add-menu-btn {
+        font-size: 1em; /* Adjusted button font size */
+        padding: 10px; /* Adjusted padding for mobile */
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h2>Your Menu Dashboard</h2>
-    
-    <!-- Today's Recommendation Section -->
-    <div class="recommendation-container" id="recommendationContainer">
-      <h3>Today's Recommendation</h3>
-      <div id="recommendationList" class="menu-list"></div>
+    <div class="section">
+      <div class="date-container" id="currentDate"></div>
+
+      <!-- Today's Recommendation Section -->
+      <div class="recommendation-container">
+        <h3>Today's Recommendation</h3>
+        <div id="recommendationList" class="menu-list"></div>
+      </div>
+
+      <!-- Cook at Home Section -->
+      <div class="category-container" id="homeDishes">
+        <h3>Cook at Home</h3>
+        <div class="menu-list" id="homeList"></div>
+      </div>
+
+      <!-- Order from Outside Section -->
+      <div class="category-container" id="orderDishes">
+        <h3>Order from Outside</h3>
+        <div class="menu-list" id="orderList"></div>
+      </div>
+
+      <!-- Add Menu Button -->
+      <a href="addDish.html" class="add-menu-btn">Add Menu</a>
     </div>
-
-    <div class="category" id="homeDishes">
-      <h3>Cook at Home</h3>
-      <div class="menu-list" id="homeList"></div>
-    </div>
-
-    <div class="category" id="orderDishes">
-      <h3>Order from Outside</h3>
-      <div class="menu-list" id="orderList"></div>
-    </div>
-
-    <div class="date-container" id="currentDate"></div>
-
-    <!-- Add Menu Button -->
-    <a href="addDish.html" class="add-menu-btn">Add Menu</a>
   </div>
 
   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const dishes = JSON.parse(localStorage.getItem("dishes")) || [];
 
-document.addEventListener("DOMContentLoaded", () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const dishes = JSON.parse(localStorage.getItem("dishes")) || [];
+      // Redirect to sign-up page if no user is logged in
+      if (!user) {
+        window.location.href = "index.html";
+        return;
+      }
 
-  // Redirect to sign-up page if no user is logged in
-  if (!user) {
-    window.location.href = "index.html";
-    return;
-  }
-
-  // Render the rest of the dashboard content
-  // Get the current date in the present calendar format
-  const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
-  // Display the current date at the top right of the page
-  document.getElementById("currentDate").textContent = `Today's Date: ${formattedDate}`;
-
-  // Retrieve dishes from localStorage
-  const homeList = document.getElementById("homeList");
-  const orderList = document.getElementById("orderList");
-  const recommendationList = document.getElementById("recommendationList");
-
-  // Display dishes on the dashboard
-  if (dishes.length === 0) {
-    homeList.innerHTML = "<p>No dishes added yet.</p>";
-    orderList.innerHTML = "<p>No dishes added yet.</p>";
-  } else {
-    dishes.forEach((dish) => {
-      // Create a new menu item element
-      const dishElement = document.createElement("div");
-      dishElement.classList.add("menu-item");
-
-      // Add the dish to the appropriate section (Cook at Home or Order from Outside)
-      dishElement.innerHTML = `
-        <h4>${dish.dishName}</h4>
-      `;
-
-      // Attach an event listener to each dish to select it for the day
-      dishElement.addEventListener("click", () => {
-        // Remove the 'selected' class from all other menu items
-        const allMenuItems = document.querySelectorAll(".menu-item");
-        allMenuItems.forEach((item) => item.classList.remove("selected"));
-
-        // Mark the clicked dish as selected
-        dishElement.classList.add("selected");
-
-        // Store the selected dish for the day
-        localStorage.setItem("selectedDish", dish.dishName);
+      // Get the current date in the present calendar format
+      const currentDate = new Date();
+      const formattedDate = currentDate.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       });
 
-      if (dish.menuType === "home") {
-        homeList.appendChild(dishElement);
+      // Display the current date at the top right of the page
+      document.getElementById("currentDate").textContent = `Today's Date: ${formattedDate}`;
+
+      const homeList = document.getElementById("homeList");
+      const orderList = document.getElementById("orderList");
+      const recommendationList = document.getElementById("recommendationList");
+
+      // Display dishes on the dashboard
+      if (dishes.length === 0) {
+        homeList.innerHTML = "<p>No dishes added yet.</p>";
+        orderList.innerHTML = "<p>No dishes added yet.</p>";
       } else {
-        orderList.appendChild(dishElement);
+        dishes.forEach((dish) => {
+          const dishElement = document.createElement("div");
+          dishElement.classList.add("menu-item");
+          dishElement.innerHTML = `<h4>${dish.dishName}</h4>`;
+
+          dishElement.addEventListener("click", () => {
+            const allMenuItems = document.querySelectorAll(".menu-item");
+            allMenuItems.forEach((item) => item.classList.remove("selected"));
+            dishElement.classList.add("selected");
+            localStorage.setItem("selectedDish", dish.dishName);
+          });
+
+          if (dish.menuType === "home") {
+            homeList.appendChild(dishElement);
+          } else {
+            orderList.appendChild(dishElement);
+          }
+        });
       }
-    });
-  }
 
-  // Function to generate today's recommendation
-  function generateRecommendation() {
-    const selectedDish = localStorage.getItem("selectedDish");
-    let filteredDishes = dishes.filter(
-      (dish) => dish.dishName !== selectedDish
-    ); // Exclude the selected dish for today
-    const recommendationCount = Math.min(2, filteredDishes.length); // Randomly select 1 or 2 dishes
+      // Generate today's recommendation
+      function generateRecommendation() {
+        const selectedDish = localStorage.getItem("selectedDish");
+        let filteredDishes = dishes.filter(
+          (dish) => dish.dishName !== selectedDish
+        );
+        const recommendationCount = Math.min(2, filteredDishes.length);
+        filteredDishes = filteredDishes.sort(() => Math.random() - 0.5);
 
-    // Shuffle dishes for randomness
-    filteredDishes = filteredDishes.sort(() => Math.random() - 0.5);
-
-    const recommendationItems = filteredDishes.slice(0, recommendationCount);
-
-    recommendationList.innerHTML = ""; // Clear previous recommendations
-    recommendationItems.forEach((dish) => {
-      const dishElement = document.createElement("div");
-      dishElement.classList.add("recommendation-item");
-
-      dishElement.innerHTML = `
-        <h4>${dish.dishName}</h4>
-        <p>${dish.menuType === "home" ? "Cook at Home" : "Order from Outside"}</p>
-      `;
-
-      recommendationList.appendChild(dishElement);
-    });
-  }
-
-  // Generate today's recommendation
-  generateRecommendation();
-
-  // Automatically reset the selected dish at the end of the day
-  setInterval(() => {
-    const currentDay = new Date().getDate();
-    const storedDate = localStorage.getItem("currentDay");
-
-    if (currentDay !== Number(storedDate)) {
-      localStorage.removeItem("selectedDish");
-      const selectedDish = document.querySelector(".menu-item.selected");
-      if (selectedDish) {
-        selectedDish.classList.remove("selected");
+        recommendationList.innerHTML = "";
+        filteredDishes.slice(0, recommendationCount).forEach((dish) => {
+          const dishElement = document.createElement("div");
+          dishElement.classList.add("recommendation-item");
+          dishElement.innerHTML = `<h4>${dish.dishName}</h4>`;
+          recommendationList.appendChild(dishElement);
+        });
       }
-      localStorage.setItem("currentDay", currentDay);
-    }
-  }, 1000 * 60 * 60 * 24); // Check every 24 hours
-});
 
+      generateRecommendation();
+
+      // Reset the selected dish at the end of the day
+      setInterval(() => {
+        const currentDay = new Date().getDate();
+        const storedDate = localStorage.getItem("currentDay");
+        if (currentDay !== Number(storedDate)) {
+          localStorage.removeItem("selectedDish");
+          document
+            .querySelectorAll(".menu-item.selected")
+            .forEach((item) => item.classList.remove("selected"));
+          localStorage.setItem("currentDay", currentDay);
+        }
+      }, 1000 * 60 * 60 * 24);
+    });
   </script>
 </body>
 </html>
